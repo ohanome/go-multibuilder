@@ -64,7 +64,7 @@ foreach ($clean_dists as $dist) {
     exec("env CGO_ENABLED=1 GOOS=$os GOARCH=$arch go build -o $filename", $out, $res);
     if ($res !== 0) {
         echo "FAIL\n";
-        exit($res);
+    } else {
+        echo "DONE\n";
     }
-    echo "DONE\n";
 }
