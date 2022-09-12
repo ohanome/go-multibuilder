@@ -60,8 +60,13 @@ foreach ($clean_dists as $dist) {
         $filename .= ".$file_ext";
     }
 
+    $cgo = '1';
+    if ($os == 'linux') {
+        $cgo = '0';
+    }
+
     echo "Building $filename: ";
-    exec("env CGO_ENABLED=1 GOOS=$os GOARCH=$arch go build -o $filename", $out, $res);
+    exec("env CGO_ENABLED=$cgo GOOS=$os GOARCH=$arch go build -o $filename", $out, $res);
     if ($res !== 0) {
         echo "FAIL\n";
     } else {
